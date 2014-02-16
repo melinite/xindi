@@ -2,7 +2,7 @@
 
 <cfoutput>
 	<!DOCTYPE html>
-	
+
 	<html lang="en">
 		<head>
 			<meta charset="utf-8">
@@ -21,13 +21,13 @@
 				<script src="public/assets/js/html5shiv.js"></script>
 			<![endif]-->
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-			
+
 			<cfif Len(rc.config.googleanalyticstrackingid)>
 				<script type="text/javascript">
 				var _gaq = _gaq || [];
 				_gaq.push(['_setAccount', '#rc.config.googleanalyticstrackingid#']);
 				_gaq.push(['_trackPageview']);
-				
+
 				(function() {
 					var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 					ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -36,35 +36,27 @@
 				</script>
 				<script src="public/assets/js/outbound-link-tracking.js"></script>
 			</cfif>
-					
-			<link rel="shortcut icon" href="favicon.ico">
-			<link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
-			<link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
-			<link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
-			<link rel="apple-touch-icon-precomposed" sizes="57x57" href="apple-touch-icon-57x57-precomposed.png">
-			<link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">			
-			<link rel="apple-touch-icon" href="apple-touch-icon.png">
-			
-			<cfif rc.config.news.enabled><link rel="alternate" type="application/rss+xml" href="#buildURL( 'news.rss' )#"></cfif>			
-		</head>		
-		
+
+			<cfif rc.config.news.enabled><link rel="alternate" type="application/rss+xml" href="#buildURL('news.rss')#"></cfif>
+		</head>
+
 		<body id="#getSection()#" class="#getItem()#">
 			<cfif rc.config.development>
 				<span class="dev-mode label label-warning">Development Mode</span>
 			</cfif>
-			
+
 			<div class="navbar navbar-fixed-top" role="banner">
 				<div class="navbar-inner">
 					<div class="container">
 						<a class="brand" href="#rc.basehref#" title="Return to home page"><img src="public/assets/img/global/xindi-logo.png" alt="Xindi logo" /></a>
-						
-					    <form action="#buildURL( 'search' )#" method="post" class="navbar-search pull-right" id="search" role="search">
-					    	<input type="text" name="searchterm" id="searchterm" class="search-query" placeholder="Search">
-					    </form>							
+
+						<form action="#buildURL('search')#" method="post" class="navbar-search pull-right" id="search" role="search">
+							<input type="text" name="searchterm" id="searchterm" class="search-query" placeholder="Search">
+						</form>
 					</div>
 				</div>
-			</div>			
-			
+			</div>
+
 			<div id="container" class="container">
 				<div class="row">
 					<nav class="span12" id="primary-navigation" role="navigation">
@@ -75,18 +67,18 @@
 							<cfset local.currLevel = rc.navigation.depth>
 
 							<cfif local.currLevel gt local.prevLevel>
-								<ul class="<cfif local.prevLevel eq -1>nav nav-pills<cfelse>dropdown-menu</cfif>"><li><a href="#buildURL( rc.navigation.slug )#">#rc.navigation.title#</a>
+								<ul class="<cfif local.prevLevel eq -1>nav nav-pills<cfelse>dropdown-menu</cfif>"><li><a href="#buildURL(rc.navigation.slug)#">#rc.navigation.title#</a>
 							<cfelseif local.currLevel lt local.prevLevel>
 								<cfset local.tmp = local.prevLevel>
 
 								<cfloop condition="local.tmp gt local.currLevel">
 									</li></ul>
-									
+
 									<cfset local.tmp -= 1>
 								</cfloop>
-								</li><li><a href="#buildURL( rc.navigation.slug )#">#rc.navigation.title#</a>
+								</li><li><a href="#buildURL(rc.navigation.slug)#">#rc.navigation.title#</a>
 							<cfelse>
-								</li><li><a href="#buildURL( rc.navigation.slug )#">#rc.navigation.title#</a>
+								</li><li><a href="#buildURL(rc.navigation.slug)#">#rc.navigation.title#</a>
 							</cfif>
 
 							<cfset local.prevLevel = rc.navigation.depth>
@@ -101,16 +93,16 @@
 						</cfloop>
 					</nav>
 				</div>
-				
+
 				<div id="content" class="row" role="main">
 					<div class="span12">#body#</div>
 				</div>
 
 				<footer id="footer" class="row" role="contentinfo">
-					<div class="span12"><a href="#buildURL( 'navigation/map' )#">Site Map</a></div>
+					<div class="span12"><a href="#buildURL('navigation/map')#">Site Map</a></div>
 				</footer>
 			</div>
-			
+
 			<script src="public/assets/js/core.js?r=#rc.config.revision#"></script>
 		</body>
 	</html>
